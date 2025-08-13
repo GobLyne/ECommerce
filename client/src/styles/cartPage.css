@@ -1,0 +1,90 @@
+.cart-page-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f4f4f4;
+}
+
+.receipt {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.receipt-header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px dashed #ccc;
+  padding-bottom: 1rem;
+}
+
+.cart-items {
+  margin-bottom: 2rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.product-image-cart {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.item-details {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name {
+  font-size: 1rem;
+  color: #555;
+}
+
+.item-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.receipt-summary {
+  border-top: 2px dashed #ccc;
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary-line.total {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #000;
+  margin-top: 1rem;
+}
+
+.checkout-container {
+  text-align: center;
+}
