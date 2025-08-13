@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { UserContext } from './userContext';
 
@@ -13,16 +13,7 @@ export const CartProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
 
-  // Load cart when user changes
-  useEffect(() => {
-    if (user) {
-      loadCart();
-    } else {
-      setCart({ items: [] });
-    }
-  }, [user]);
-
-  const loadCart = async () => {
+  const loadCart = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -35,7 +26,16 @@ export const CartProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  // Load cart when user changes
+  useEffect(() => {
+    if (user) {
+      loadCart();
+    } else {
+      setCart({ items: [] });
+    }
+  }, [user, loadCart]);
 
   const addToCart = async (product) => {
     if (!user) {
@@ -70,6 +70,21 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const updateQuantity = async (productId, quantity) => {
+    if (!user) return;
+
+    try {
+      const response = await axios.post('/api/cart/update', {
+        productId,
+        quantity
+      });
+      setCart(response.data);
+    } catch (error) {
+      console.error('Error updating cart quantity:', error);
+      throw error;
+    }
+  };
+
   const clearCart = async () => {
     if (!user) return;
 
@@ -98,6 +113,7 @@ export const CartProvider = ({ children }) => {
       loading,
       addToCart,
       removeFromCart,
+      updateQuantity,
       clearCart,
       loadCart,
       getCartTotal,
