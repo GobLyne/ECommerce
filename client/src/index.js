@@ -9,6 +9,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { CartProvider } from './context/cartContext';
 import { UserProvider } from './context/userContext';
+import { ChatbotProvider } from './context/chatbotContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter>
       <UserProvider>
         <CartProvider>
-          <App />
+          <ChatbotProvider>
+            <App />
+          </ChatbotProvider>
         </CartProvider>
       </UserProvider>
     </BrowserRouter>

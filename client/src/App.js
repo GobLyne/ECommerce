@@ -4,12 +4,14 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import './styles/App.css';
 import ProductCard from './components/productCard';
+import ChatbotEnhanced from './components/ChatbotEnhanced';
 import CartPage from './pages/cartPage';
 import PaymentPage from './pages/paymentPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { useCart } from './context/cartContext';
 import { UserContext } from './context/userContext';
+import { ChatbotProvider } from './context/chatbotContext';
 
 const API_BASE = process.env.REACT_APP_API_BASE || '';
 
@@ -218,6 +220,7 @@ function App() {
           © {new Date().getFullYear()} MyShop. All rights reserved.
         </div>
       </footer>
+      <ChatbotEnhanced />
     </div>
   );
 }

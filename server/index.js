@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const authRoutes = require('./routes/authRoutes');
+const chatbotRoutes = require('./routes/chatbotRoutes');
 
 const app = express();
 
@@ -22,6 +23,7 @@ connectDB();
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Serve frontend React build
 app.use(express.static(path.join(__dirname, '../client/build')));
