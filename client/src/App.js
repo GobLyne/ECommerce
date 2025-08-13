@@ -11,6 +11,8 @@ import RegisterPage from './pages/RegisterPage';
 import { useCart } from './context/cartContext';
 import { UserContext } from './context/userContext';
 
+const API_BASE = process.env.REACT_APP_API_BASE || '';
+
 // Protected Route Component
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(UserContext);
@@ -31,13 +33,14 @@ const HomePage = () => {
   const { addToCart, getCartItemCount } = useCart();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/products')
+    axios.get(`${API_BASE}/api/products`)
       .then(res => {
         setProducts(res.data);
         setFilteredProducts(res.data);
         setLoading(false);
       })
       .catch(err => {
+        console.error('Product load error:', err?.response?.data || err.message);
         setError('Failed to load products');
         setLoading(false);
       });
