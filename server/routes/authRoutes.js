@@ -108,4 +108,66 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Update user profile
+router.put('/update-profile', auth, async (req, res) => {
+  const {
+    username,
+    email,
+    firstName,
+    lastName,
+    phone,
+    address,
+    city,
+    zipCode,
+    country
+  } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    // Check if email is being changed and if it's already taken
+    if (email && email !== user.email) {
+      const emailExists = await User.findOne({ email });
+      if (emailExists) {
+        return res.status(400).json({ msg: 'Email already in use' });
+      }
+    }
+
+    // Update user fields
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
+    if (phone) user.phone = phone;
+    if (address) user.address = address;
+    if (city) user.city = city;
+    if (zipCode) user.zipCode = zipCode;
+    if (country) user.country = country;
+
+    await user.save();
+
+    res.json({
+      msg: 'Profile updated successfully',
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        address: user.address,
+        city: user.city,
+        zipCode: user.zipCode,
+        country: user.country
+      }
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;

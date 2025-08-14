@@ -39,6 +39,17 @@ export const UserProvider = ({ children }) => {
     setAuthToken(false);
   };
 
+  const updateUser = async (userData) => {
+    try {
+      const res = await axios.put('/api/auth/update-profile', userData);
+      setUser(res.data.user);
+      return res.data;
+    } catch (err) {
+      console.error(err.response.data);
+      throw err;
+    }
+  };
+
   const setAuthToken = (token) => {
     if (token) {
       axios.defaults.headers.common['x-auth-token'] = token;
@@ -62,11 +73,12 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     loadUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <UserContext.Provider
-      value={{ user, loading, login, register, logout }}
+      value={{ user, loading, login, register, logout, updateUser }}
     >
       {children}
     </UserContext.Provider>

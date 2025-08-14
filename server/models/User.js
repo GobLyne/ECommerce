@@ -15,6 +15,36 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  firstName: {
+    type: String,
+    default: '',
+  },
+  lastName: {
+    type: String,
+    default: '',
+  },
+  phone: {
+    type: String,
+    default: '',
+  },
+  address: {
+    type: String,
+    default: '',
+  },
+  city: {
+    type: String,
+    default: '',
+  },
+  zipCode: {
+    type: String,
+    default: '',
+  },
+  country: {
+    type: String,
+    default: 'Malaysia',
+  },
+}, {
+  timestamps: true,
 });
 
 module.exports = mongoose.model('User', userSchema);

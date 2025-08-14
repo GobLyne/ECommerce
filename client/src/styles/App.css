@@ -56,16 +56,6 @@ a:hover {
   color: #495057;
 }
 
-.user-welcome {
-  margin-right: 1rem;
-  font-weight: 500;
-  color: #333;
-  background: #e3f2fd;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-}
-
 .site-header nav a:hover {
   color: #007bff;
 }
@@ -682,6 +672,15 @@ a:hover {
   border-radius: 25px;
   font-size: 0.9rem;
   font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.user-welcome:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .cart-link {

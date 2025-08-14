@@ -9,6 +9,7 @@ import CartPage from './pages/cartPage';
 import PaymentPage from './pages/paymentPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
 import { useCart } from './context/cartContext';
 import { UserContext } from './context/userContext';
 import { ChatbotProvider } from './context/chatbotContext';
@@ -140,10 +141,10 @@ function App() {
         <nav>
           {user ? (
             <>
-              <span className="user-welcome">
+              <Link to="/profile" className="user-welcome">
                 <i className="pi pi-user"></i>
                 Welcome, {user.username}!
-              </span>
+              </Link>
               <Link to="/cart" className="cart-link">
                 <Button
                   icon="pi pi-shopping-cart"
@@ -187,6 +188,11 @@ function App() {
           <Route path="/cart" element={
             <PrivateRoute>
               <CartPage />
+            </PrivateRoute>
+          } />
+          <Route path="/profile" element={
+            <PrivateRoute>
+              <ProfilePage />
             </PrivateRoute>
           } />
           <Route path="/payment" element={
