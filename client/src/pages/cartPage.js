@@ -63,24 +63,30 @@ const CartPage = () => {
 
             <div className="cart-items-list">
               {cartItems.map((item) => (
-                <div key={item.product._id} className="cart-item-card">
+                <div key={item.product?._id || item._id || Math.random()} className="cart-item-card">
                   <div className="item-image-section">
-                    <img
-                      src={item.product.image}
-                      alt={item.product.name}
-                      className="item-image"
-                    />
+                    {item.product && item.product.image ? (
+                      <img
+                        src={item.product.image}
+                        alt={item.product.name || 'Product'}
+                        className="item-image"
+                      />
+                    ) : (
+                      <div className="item-image-placeholder">
+                        <i className="pi pi-image" style={{ fontSize: '2rem', color: '#ccc' }}></i>
+                      </div>
+                    )}
                   </div>
 
                   <div className="item-info-section">
-                    <h3 className="item-name">{item.product.name}</h3>
+                    <h3 className="item-name">{item.product?.name || 'Unknown Product'}</h3>
                     <p className="item-description">
-                      {item.product.description || "Premium quality product"}
+                      {item.product?.description || "Premium quality product"}
                     </p>
                     <div className="item-actions">
                       <button
                         className="remove-btn"
-                        onClick={() => removeFromCart(item.product._id)}
+                        onClick={() => removeFromCart(item.product?._id || item._id)}
                       >
                         <i className="pi pi-trash"></i> Remove
                       </button>
@@ -91,21 +97,21 @@ const CartPage = () => {
                   </div>
 
                   <div className="item-price-section">
-                    <span className="item-price">RM {item.product.price.toFixed(2)}</span>
+                    <span className="item-price">RM {item.product?.price ? item.product.price.toFixed(2) : 'N/A'}</span>
                   </div>
 
                   <div className="item-quantity-section">
                     <div className="quantity-controls">
                       <button
                         className="qty-btn"
-                        onClick={() => handleQuantityChange(item.product._id, item.quantity - 1)}
+                        onClick={() => handleQuantityChange(item.product?._id || item._id, item.quantity - 1)}
                       >
                         -
                       </button>
                       <span className="quantity">{item.quantity}</span>
                       <button
                         className="qty-btn"
-                        onClick={() => handleQuantityChange(item.product._id, item.quantity + 1)}
+                        onClick={() => handleQuantityChange(item.product?._id || item._id, item.quantity + 1)}
                       >
                         +
                       </button>
@@ -113,7 +119,7 @@ const CartPage = () => {
                   </div>
 
                   <div className="item-total-section">
-                    <span className="item-total">RM {(item.product.price * item.quantity).toFixed(2)}</span>
+                    <span className="item-total">RM {item.product?.price ? (item.product.price * item.quantity).toFixed(2) : 'N/A'}</span>
                   </div>
                 </div>
               ))}

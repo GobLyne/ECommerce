@@ -220,7 +220,10 @@ function App() {
           © {new Date().getFullYear()} MyShop. All rights reserved.
         </div>
       </footer>
-      <ChatbotEnhanced />
+      {/* Show chatbot only if user is logged in and not on login/register pages */}
+      {user && window.location.pathname !== '/login' && window.location.pathname !== '/register' && (
+        <ChatbotEnhanced />
+      )}
     </div>
   );
 }
