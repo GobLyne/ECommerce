@@ -137,9 +137,9 @@ See `server/.env.example` for all required variables:
 
 ## 🖼️ Screenshots
 
-![Cart Page](client\public\cart.png)
-![Chatbot Assistant](client\public\chatbot.png)
-![Product Listing](client\public\homepage.png)
+![Cart Page](client/public/cart.png)
+![Chatbot Assistant](client/public/chatbot.png)
+![Product Listing](client/public/homepage.png)
 
 ---
 
